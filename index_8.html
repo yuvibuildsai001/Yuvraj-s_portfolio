@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yuvraj Rajput — Testing Technician &amp; Data Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0D1117;
+    --panel:#161B22;
+    --panel-2:#1C2129;
+    --ink:#E6EDF3;
+    --ink-soft:#8B949E;
+    --line:#30363D;
+    --green:#3FB950;
+    --green-soft:rgba(63,185,80,0.12);
+    --green-line:rgba(63,185,80,0.35);
+    --blue:#58A6FF;
+    --radius:6px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 32px;}
+  a{color:inherit; text-decoration:none;}
+  ::selection{background:var(--green); color:#03170a;}
+  section{scroll-margin-top:84px;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  /* ---------- Toolbar / Nav ---------- */
+  header{
+    position:sticky; top:0; z-index:60;
+    background:rgba(13,17,23,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .toolbar{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 32px;
+    max-width:1120px; margin:0 auto;
+    gap:16px;
+  }
+  .brand{
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:600; font-size:15px; letter-spacing:-0.01em;
+    display:flex; align-items:center; gap:8px;
+    color:var(--ink);
+  }
+  .brand svg{width:20px; height:20px; fill:var(--ink);}
+  .brand .slash{color:var(--ink-soft); font-weight:400;}
+  nav{display:flex; align-items:center; gap:2px; flex:1; justify-content:center;}
+  nav a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    padding:8px 12px;
+    border-radius:var(--radius);
+    border:1px solid transparent;
+    transition:all .15s ease;
+    cursor:pointer;
+  }
+  nav a:hover{color:var(--ink); background:var(--panel); border-color:var(--line);}
+  .resume-btn{
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px; font-weight:500;
+    color:#03170a; background:var(--green);
+    padding:8px 14px; border-radius:var(--radius);
+    display:inline-flex; align-items:center; gap:6px;
+    border:1px solid var(--green);
+    white-space:nowrap;
+    transition:filter .15s ease;
+  }
+  .resume-btn:hover{filter:brightness(1.1);}
+  .nav-toggle{display:none; flex-direction:column; gap:4px; cursor:pointer; background:none; border:none;}
+  .nav-toggle span{width:20px; height:2px; background:var(--ink);}
+
+  @media (max-width:860px){
+    nav{
+      position:absolute; top:100%; left:0; right:0;
+      background:var(--panel); border-bottom:1px solid var(--line);
+      flex-direction:column; padding:8px; align-items:stretch;
+      display:none;
+    }
+    nav.open{display:flex;}
+    nav a{padding:12px 14px; border-bottom:1px solid var(--line); border-radius:0;}
+    .nav-toggle{display:flex;}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{padding:64px 0 40px;}
+  .sheet{
+    border:1px solid var(--line);
+    background:var(--panel);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .sheet-titlebar{
+    display:flex; align-items:center; gap:8px;
+    padding:10px 16px;
+    border-bottom:1px solid var(--line);
+    background:var(--panel-2);
+  }
+  .sheet-titlebar .dots{display:flex; gap:6px;}
+  .sheet-titlebar .dots span{width:10px; height:10px; border-radius:50%; background:var(--line);}
+  .sheet-titlebar .fname{font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--ink-soft); margin-left:8px;}
+  .sheet-body{padding:32px 28px;}
+  .role-tag{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; color:var(--green);
+    background:var(--green-soft);
+    border:1px solid var(--green-line);
+    padding:5px 10px; border-radius:999px;
+    margin-bottom:18px;
+  }
+  .role-tag .pulse{width:7px; height:7px; border-radius:50%; background:var(--green); animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:.35;}}
+  h1.name{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-weight:700;
+    font-size:clamp(34px, 5.5vw, 56px);
+    line-height:1.05;
+    letter-spacing:-0.02em;
+  }
+  .hero-title{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:clamp(13px,2vw,16px);
+    color:var(--ink-soft);
+    margin-top:12px;
+  }
+  .hero-title .sep{color:var(--green); margin:0 6px;}
+  .hero-summary{
+    margin-top:18px; max-width:640px;
+    font-size:15px; color:var(--ink-soft);
+  }
+  .hero-top{display:flex; align-items:flex-start; justify-content:space-between; gap:24px; flex-wrap:wrap;}
+  .avatar{
+    width:104px; height:104px; border-radius:50%;
+    border:2px solid var(--line);
+    object-fit:cover; flex-shrink:0;
+    background:var(--panel-2);
+  }
+  .avatar-fallback{
+    width:104px; height:104px; border-radius:50%;
+    border:2px solid var(--line);
+    background:var(--green-soft); color:var(--green);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono', monospace; font-weight:600; font-size:30px;
+    flex-shrink:0;
+  }
+  @media (max-width:640px){
+    .hero-top{flex-direction:column-reverse; align-items:flex-start;}
+  }
+  .hero-actions{display:flex; gap:12px; margin-top:26px; flex-wrap:wrap;}
+  .btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    padding:11px 18px;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    display:inline-flex; align-items:center; gap:8px;
+    transition:all .15s ease;
+    cursor:pointer;
+  }
+  .btn-solid{background:var(--green); color:#03170a; border-color:var(--green); font-weight:500;}
+  .btn-solid:hover{filter:brightness(1.1);}
+  .btn-outline{color:var(--ink);}
+  .btn-outline:hover{background:var(--panel-2); border-color:var(--ink-soft);}
+
+  /* KPI strip */
+  .kpis{
+    display:grid; grid-template-columns:repeat(4,1fr);
+    border:1px solid var(--line); border-top:none;
+    border-radius:0 0 var(--radius) var(--radius);
+    background:var(--panel);
+  }
+  .kpi{padding:16px 18px; border-right:1px solid var(--line);}
+  .kpi:last-child{border-right:none;}
+  .kpi .num{font-family:'IBM Plex Mono', monospace; font-weight:600; font-size:22px; color:var(--green);}
+  .kpi .lbl{font-family:'IBM Plex Mono', monospace; font-size:10.5px; color:var(--ink-soft); margin-top:4px; text-transform:uppercase; letter-spacing:.03em;}
+  @media (max-width:640px){
+    .kpis{grid-template-columns:repeat(2,1fr);}
+    .kpi:nth-child(2){border-right:none;}
+    .kpi{border-bottom:1px solid var(--line);}
+  }
+
+  /* ---------- Section shell ---------- */
+  section{padding:56px 0;}
+  .section-head{
+    display:flex; align-items:baseline; gap:12px;
+    margin-bottom:28px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:14px;
+  }
+  .section-head .idx{font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--green);}
+  .section-head h2{font-family:'IBM Plex Sans', sans-serif; font-weight:700; font-size:23px; letter-spacing:-0.01em;}
+  .section-head .fn{margin-left:auto; font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--ink-soft);}
+
+  /* ---------- About ---------- */
+  .about-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:36px;}
+  .about-grid p{color:var(--ink-soft); font-size:14.5px; margin-bottom:14px;}
+  .about-grid p strong{color:var(--ink); font-weight:600;}
+  .fact-table{border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;}
+  .fact-row{display:grid; grid-template-columns:110px 1fr; border-bottom:1px solid var(--line); font-size:13px;}
+  .fact-row:last-child{border-bottom:none;}
+  .fact-row .k{font-family:'IBM Plex Mono', monospace; padding:11px 14px; color:var(--ink-soft); background:var(--panel-2); border-right:1px solid var(--line);}
+  .fact-row .v{padding:11px 14px; background:var(--panel);}
+  @media (max-width:760px){.about-grid{grid-template-columns:1fr;}}
+
+  /* ---------- Skills ---------- */
+  .skills-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;}
+  .skill-card{background:var(--panel); padding:20px;}
+  .skill-card h3{font-family:'IBM Plex Mono', monospace; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--green); margin-bottom:12px;}
+  .skill-card .tags{display:flex; flex-wrap:wrap; gap:6px;}
+  .skill-card .tags span{font-size:12px; padding:5px 9px; background:var(--panel-2); border:1px solid var(--line); font-family:'IBM Plex Mono', monospace; border-radius:4px; color:var(--ink-soft);}
+  @media (max-width:760px){.skills-grid{grid-template-columns:1fr;}}
+
+  /* ---------- Projects / Experience cards ---------- */
+  .project{border:1px solid var(--line); margin-bottom:18px; background:var(--panel); border-radius:var(--radius); overflow:hidden;}
+  .project-head{display:flex; align-items:center; justify-content:space-between; padding:14px 20px; border-bottom:1px solid var(--line); background:var(--panel-2); flex-wrap:wrap; gap:10px;}
+  .project-head h3{font-family:'IBM Plex Sans', sans-serif; font-size:17px; font-weight:600;}
+  .project-head .meta{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--ink-soft);}
+  .project-body{padding:20px;}
+  .stack{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px;}
+  .stack span{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--green); background:var(--green-soft); border:1px solid var(--green-line); padding:4px 8px; border-radius:4px;}
+  .project-body ul{list-style:none;}
+  .project-body li{position:relative; padding-left:18px; margin-bottom:9px; font-size:14px; color:var(--ink-soft);}
+  .project-body li::before{content:"›"; position:absolute; left:0; color:var(--green); font-weight:600;}
+  .project-link{display:inline-flex; align-items:center; gap:6px; font-family:'IBM Plex Mono', monospace; font-size:12px; margin-top:6px; margin-right:16px; color:var(--blue);}
+  .project-link:hover{text-decoration:underline;}
+  .demo-btn{
+    display:inline-flex; align-items:center; gap:6px; font-family:'IBM Plex Mono', monospace; font-size:12px;
+    margin-top:6px; color:var(--green); background:none; border:none; cursor:pointer; padding:0;
+  }
+  .demo-btn:hover{text-decoration:underline;}
+  .modal-body video{width:100%; border-radius:4px; border:1px solid var(--line); display:block; background:#000;}
+
+  /* ---------- Certifications (clickable) & Achievements ---------- */
+  .two-col{display:grid; grid-template-columns:1fr 1fr; gap:28px;}
+  @media (max-width:760px){.two-col{grid-template-columns:1fr;}}
+  .list-panel{border:1px solid var(--line); background:var(--panel); border-radius:var(--radius); overflow:hidden;}
+  .list-panel .row{display:flex; gap:14px; align-items:flex-start; padding:14px 18px; border-bottom:1px solid var(--line);}
+  .list-panel .row:last-child{border-bottom:none;}
+  .list-panel .row .mark{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--green); padding-top:2px; flex-shrink:0;}
+  .list-panel .row .txt{font-size:13.5px; color:var(--ink-soft);}
+  .list-panel .row .txt strong{color:var(--ink); font-weight:600;}
+  .list-panel .row .yr{margin-left:auto; font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--ink-soft); flex-shrink:0; padding-top:2px;}
+
+  .cert-btn{
+    display:flex; gap:14px; align-items:flex-start; width:100%; text-align:left;
+    padding:14px 18px; border-bottom:1px solid var(--line);
+    background:none; border-left:none; border-right:none; border-top:none;
+    color:inherit; font:inherit; cursor:pointer;
+    transition:background .15s ease;
+  }
+  .cert-btn:last-child{border-bottom:none;}
+  .cert-btn:hover{background:var(--panel-2);}
+  .cert-btn .mark{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--green); padding-top:2px; flex-shrink:0;}
+  .cert-btn .txt{font-size:13.5px; color:var(--ink-soft);}
+  .cert-btn .txt strong{color:var(--ink); font-weight:600;}
+  .cert-btn .go{margin-left:auto; color:var(--ink-soft); font-family:'IBM Plex Mono', monospace; font-size:14px; flex-shrink:0;}
+
+  /* Modal */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(1,4,9,0.75);
+    display:none; align-items:center; justify-content:center; z-index:100; padding:24px;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-box{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    max-width:560px; width:100%; max-height:88vh; overflow:auto;
+  }
+  .modal-titlebar{display:flex; align-items:center; justify-content:space-between; padding:14px 18px; border-bottom:1px solid var(--line); background:var(--panel-2);}
+  .modal-titlebar h4{font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--ink);}
+  .modal-close{background:none; border:1px solid var(--line); color:var(--ink-soft); border-radius:4px; width:26px; height:26px; cursor:pointer; font-size:14px;}
+  .modal-close:hover{color:var(--ink); border-color:var(--ink-soft);}
+  .modal-body{padding:20px;}
+  .modal-body img{width:100%; border-radius:4px; border:1px solid var(--line); display:block;}
+  .modal-fallback{
+    padding:44px 20px; text-align:center; border:1px dashed var(--line); border-radius:4px; color:var(--ink-soft);
+  }
+  .modal-fallback .icon{font-size:34px; margin-bottom:10px;}
+  .modal-fallback p{font-size:13px; line-height:1.6;}
+  .modal-fallback code{font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--green); background:var(--green-soft); padding:2px 6px; border-radius:3px;}
+  .modal-meta{margin-top:14px; font-size:13px; color:var(--ink-soft);}
+
+  /* ---------- Education ---------- */
+  .edu-row{display:grid; grid-template-columns:130px 1fr; border:1px solid var(--line); border-top:none; background:var(--panel);}
+  .edu-row:first-child{border-top:1px solid var(--line); border-radius:var(--radius) var(--radius) 0 0; overflow:hidden;}
+  .edu-row:last-child{border-radius:0 0 var(--radius) var(--radius); overflow:hidden;}
+  .edu-row .yr{font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--ink-soft); padding:16px; border-right:1px solid var(--line); background:var(--panel-2);}
+  .edu-row .body{padding:16px 20px;}
+  .edu-row .body h3{font-family:'IBM Plex Sans', sans-serif; font-size:16px; font-weight:600;}
+  .edu-row .body p{font-size:13px; color:var(--ink-soft); margin-top:4px;}
+  @media (max-width:600px){.edu-row{grid-template-columns:1fr;} .edu-row .yr{border-right:none; border-bottom:1px solid var(--line);}}
+
+  /* ---------- Contact ---------- */
+  .contact-panel{border:1px solid var(--green-line); background:var(--green-soft); padding:44px 36px; text-align:left; border-radius:var(--radius);}
+  .contact-panel .idx{color:var(--green);}
+  .contact-panel h2{font-family:'IBM Plex Sans', sans-serif; font-weight:700; font-size:clamp(26px,4vw,36px); margin-bottom:12px; letter-spacing:-0.01em; color:var(--ink);}
+  .contact-panel p{color:var(--ink-soft); max-width:520px; margin-bottom:24px; font-size:14.5px;}
+  .contact-links{display:flex; gap:12px; flex-wrap:wrap;}
+  .contact-links a{font-family:'IBM Plex Mono', monospace; font-size:13px; padding:11px 16px; border:1px solid var(--line); border-radius:var(--radius); display:inline-flex; align-items:center; gap:8px; background:var(--panel); transition:all .15s ease;}
+  .contact-links a:hover{border-color:var(--green); color:var(--green);}
+
+  footer{padding:24px 0; text-align:center; font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--ink-soft); border-top:1px solid var(--line);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="toolbar">
+    <div class="brand">
+      yuvraj<span class="slash">/</span>portfolio
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <nav id="navMenu">
+      <a href="#about">about</a>
+      <a href="#experience">experience</a>
+      <a href="#skills">skills</a>
+      <a href="#projects">projects</a>
+      <a href="#certifications">certifications</a>
+      <a href="#preferences">preferences</a>
+      <a href="#education">education</a>
+      <a href="#contact">contact</a>
+    </nav>
+    <a class="resume-btn" href="Yuvraj_Rajput_Resume.pdf" download>⭳ Resume</a>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <div class="wrap hero">
+    <div class="sheet">
+      <div class="sheet-titlebar">
+        <div class="dots"><span></span><span></span><span></span></div>
+        <span class="fname">README.md</span>
+      </div>
+      <div class="sheet-body">
+        <div class="role-tag"><span class="pulse"></span>OPEN TO WORK</div>
+        <div class="hero-top">
+          <div>
+            <h1 class="name">Yuvraj Rajput</h1>
+            <div class="hero-title">Testing &amp; QC Technician<span class="sep">/</span>Data Analyst<span class="sep">/</span>Python Developer</div>
+          </div>
+          <div class="avatar-fallback" id="avatarSlot">YR</div>
+        </div>
+        <p class="hero-summary">Diploma and B.Tech-qualified technician with 12 months of hands-on defence-grade electronics testing at Centum Electronics — PCB functional testing, IPC-A-610/620/600 inspection, and root-cause debugging — built alongside a self-taught data track spanning Python, SQL, and Power BI. Comfortable validating hardware with an oscilloscope or a dataset with a query.</p>
+        <div class="hero-actions">
+          <a class="btn btn-solid" href="#projects">View projects →</a>
+          <a class="btn btn-outline" href="Yuvraj_Rajput_Resume.pdf" download>⭳ Download resume</a>
+          <a class="btn btn-outline" href="#contact">Get in touch</a>
+        </div>
+      </div>
+    </div>
+    <div class="kpis">
+      <div class="kpi"><div class="num">12mo</div><div class="lbl">EMS testing experience</div></div>
+      <div class="kpi"><div class="num">11+</div><div class="lbl">Certifications</div></div>
+      <div class="kpi"><div class="num">3</div><div class="lbl">Production phases led</div></div>
+      <div class="kpi"><div class="num">60%</div><div class="lbl">Reporting effort cut</div></div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-head"><span class="idx mono">01</span><h2>About</h2><span class="fn">SELECT * FROM profile;</span></div>
+      <div class="about-grid">
+        <div>
+          <p>I'm a Diploma and B.Tech-qualified technician based in Bengaluru, Karnataka, currently pursuing a <strong>B.Tech in Information Technology</strong> at MDU Rohtak. Over 12 months at Centum Electronics I moved from UV quality inspection through fault debugging to independent functional (FCT) testing on defence-grade PCBs — hands-on with multimeters, oscilloscopes, and IPC-A-610H standards.</p>
+          <p>In parallel, I've built a self-taught data track: <strong>eleven-plus industry-recognised certifications</strong> spanning IPC electronics standards and data analytics (Deloitte Australia, IBM SkillsBuild, Coursera, Udemy, Microsoft, HackerRank), used to build an automated ETL and KPI dashboard pipeline and an AI-powered Telegram assistant wired into live Gmail and Calendar data.</p>
+          <p>I care about precision — whether that's a solder joint under UV light or a query returning the right rows. I'm looking for a Testing/QC Technician, Data Analyst, or Python Developer role where that precision is useful from day one.</p>
+        </div>
+        <div class="fact-table">
+          <div class="fact-row"><div class="k">Location</div><div class="v">Bengaluru, Karnataka, IN</div></div>
+          <div class="fact-row"><div class="k">Email</div><div class="v">yuvrajrajput9920@gmail.com</div></div>
+          <div class="fact-row"><div class="k">Phone</div><div class="v">+91-967-114-4973</div></div>
+          <div class="fact-row"><div class="k">Status</div><div class="v">Open to work</div></div>
+          <div class="fact-row"><div class="k">Focus</div><div class="v">QC Testing · Data Analytics</div></div>
+          <div class="fact-row"><div class="k">Languages</div><div class="v">Hindi (Native) · English (C1)</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="section-head"><span class="idx mono">02</span><h2>Work experience</h2><span class="fn">SELECT * FROM experience ORDER BY phase;</span></div>
+
+      <div class="project">
+        <div class="project-head">
+          <h3>Phase 3 — Testing Technician</h3>
+          <span class="meta">Centum Electronics, Bengaluru · Jul 2025 – Jan 2026</span>
+        </div>
+        <div class="project-body">
+          <div class="stack"><span>FCT Jigs</span><span>Oscilloscope</span><span>Multimeter</span><span>IPC-A-610H</span><span>OQI</span></div>
+          <ul>
+            <li>Executed Functional Jig Testing (FCT) independently on defence-grade PCBs, verifying board functionality against pass/fail parameters and electrical performance criteria for zero-defect dispatch.</li>
+            <li>Performed manual continuity, voltage, current, and signal-probing checks at component and connector level using a digital multimeter and oscilloscope.</li>
+            <li>Ran multi-stage line quality inspection — soldering, component, and IC quality per IPC-A-610H — plus Outgoing Quality Inspection before customer dispatch.</li>
+            <li>Interpreted Thales Specification and Rafael PS20022 documentation to make accept/reject decisions against drawing requirements and BOM verification.</li>
+            <li>Maintained audit-ready FCT results and line quality reports with full batch traceability; supported ESD/MSD-safe handling and 5S/Kaizen practices.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <h3>Phase 2 — Electronics Debug &amp; Fault Analysis Technician</h3>
+          <span class="meta">Centum Electronics, Bengaluru · Apr 2025 – Jun 2025</span>
+        </div>
+        <div class="project-body">
+          <div class="stack"><span>Root Cause Analysis</span><span>Multimeter</span><span>Oscilloscope</span><span>Rework Coordination</span></div>
+          <ul>
+            <li>Diagnosed power rail failures by tracing voltage drops across supply lines, identifying shorted decoupling capacitors and incorrect component placements as root causes.</li>
+            <li>Debugged continuity failures via point-to-point checks, identifying broken vias, lifted pads, and hairline solder bridges; raised detailed RCA entries per defect.</li>
+            <li>Resolved signal integrity issues with an oscilloscope, tracing clock signal distortion to cold joints on IC pins and validating waveforms after reflow.</li>
+            <li>Maintained defect logs reviewed by quality engineers to identify recurring trends and drive Kaizen improvement actions.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <h3>Phase 1 — UV Quality Inspector</h3>
+          <span class="meta">Centum Electronics, Bengaluru · Jan 2025 – Mar 2025</span>
+        </div>
+        <div class="project-body">
+          <div class="stack"><span>UV Inspection</span><span>Conformal Coating</span><span>NCR</span><span>Traceability</span></div>
+          <ul>
+            <li>Used ultraviolet inspection lamps on defence-grade PCBAs to detect surface-level anomalies invisible under standard lighting.</li>
+            <li>Identified conformal coating gaps, flux residue, solder voids, and cold joints under UV that appeared acceptable under white light; raised NCRs and escalated for rework.</li>
+            <li>Tagged and quarantined units with mechanical damage — micro-cracks, broken traces, lifted pads — with photographic evidence and detailed defect logs.</li>
+            <li>Maintained 100% traceability of rejected units, keeping inspection logs audit-ready in line with IPC-A-610H and Thales documentation requirements.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="section-head"><span class="idx mono">03</span><h2>Skills</h2><span class="fn">SELECT * FROM skills;</span></div>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>Testing &amp; Inspection</h3>
+          <div class="tags"><span>PCB Functional Testing</span><span>Hardware Validation</span><span>UV Inspection</span><span>Oscilloscope</span><span>Digital Multimeter</span></div>
+        </div>
+        <div class="skill-card">
+          <h3>Standards &amp; Compliance</h3>
+          <div class="tags"><span>IPC-A-610H</span><span>IPC-A-620</span><span>IPC-A-600</span><span>RoHS</span><span>ESD/MSD Handling</span><span>5S</span></div>
+        </div>
+        <div class="skill-card">
+          <h3>QC Documentation</h3>
+          <div class="tags"><span>NCR</span><span>Root Cause Analysis</span><span>Test Logs</span><span>MES Entry</span><span>BOM Verification</span></div>
+        </div>
+        <div class="skill-card">
+          <h3>Electronics</h3>
+          <div class="tags"><span>Schematic Reading</span><span>Analog &amp; Digital Circuits</span><span>Selective Soldering</span><span>Rework Ops</span></div>
+        </div>
+        <div class="skill-card">
+          <h3>Languages &amp; Data</h3>
+          <div class="tags"><span>Python</span><span>SQL</span><span>Pandas</span><span>NumPy</span><span>Matplotlib</span><span>Flask</span></div>
+        </div>
+        <div class="skill-card">
+          <h3>Data Tools</h3>
+          <div class="tags"><span>Power BI</span><span>Excel / Pivot Tables</span><span>Data Cleaning</span><span>KPI Reporting</span></div>
+        </div>
+        <div class="skill-card">
+          <h3>Databases</h3>
+          <div class="tags"><span>MySQL</span><span>PostgreSQL</span><span>SQLite</span><span>Joins</span><span>Subqueries</span></div>
+        </div>
+        <div class="skill-card">
+          <h3>BI &amp; Automation</h3>
+          <div class="tags"><span>ETL Pipelines</span><span>Statistical Analysis</span><span>Data Modelling</span><span>Automation</span></div>
+        </div>
+        <div class="skill-card">
+          <h3>Dev Tools</h3>
+          <div class="tags"><span>Git</span><span>GitHub</span><span>VS Code</span><span>Jupyter</span><span>Colab</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="section-head"><span class="idx mono">04</span><h2>Projects</h2><span class="fn">SELECT * FROM projects ORDER BY id;</span></div>
+
+      <div class="project">
+        <div class="project-head">
+          <h3>Data Analysis Dashboard</h3>
+          <span class="meta">github.com/yuvibuildsai001</span>
+        </div>
+        <div class="project-body">
+          <div class="stack"><span>Python</span><span>Pandas</span><span>Matplotlib</span><span>SQL</span><span>Excel</span><span>Power BI</span><span>ETL</span></div>
+          <ul>
+            <li>Designed and built an end-to-end ETL pipeline covering ingestion, cleaning, transformation, and visualisation on structured real-world datasets.</li>
+            <li>Automated KPI reporting and dashboard generation with Matplotlib and Excel, cutting manual analysis effort by over 60% and improving reporting accuracy.</li>
+            <li>Integrated SQL queries for extraction and Pandas for wrangling, aggregation, and statistical analysis to enable actionable business insights.</li>
+          </ul>
+          <a class="project-link" href="https://github.com/yuvibuildsai001" target="_blank" rel="noopener">View on GitHub →</a>
+          <button class="demo-btn" onclick="openDemo('Data Analysis Dashboard','demos/data-dashboard.mp4')">▶ View live demo</button>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <h3>Shanvika — AI Telegram Assistant</h3>
+          <span class="meta">Academic · 2024–2025</span>
+        </div>
+        <div class="project-body">
+          <div class="stack"><span>Node.js</span><span>Groq AI</span><span>Telegram Bot API</span><span>Gmail API</span><span>Calendar API</span><span>dotenv</span></div>
+          <ul>
+            <li>Built a fully functional AI-powered personal assistant Telegram bot with a real-time conversational persona, powered by the Groq LLM API and Node.js.</li>
+            <li>Integrated Google Gmail and Calendar APIs to pull live email summaries and daily schedules directly into the AI's system prompt for contextual awareness.</li>
+            <li>Implemented conversation memory, a 10-minute context refresh cycle, photo sending, and task tracking for a seamless multi-feature experience.</li>
+          </ul>
+          <a class="project-link" href="https://github.com/yuvibuildsai001" target="_blank" rel="noopener">View on GitHub →</a>
+          <button class="demo-btn" onclick="openDemo('Shanvika — AI Telegram Assistant','demos/shanvika-bot.mp4')">▶ View live demo</button>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <h3>Triple-X — Prison Escape CLI Game</h3>
+          <span class="meta">github.com/yuvibuildsai001</span>
+        </div>
+        <div class="project-body">
+          <div class="stack"><span>Python</span><span>Colorama</span><span>Pyfiglet</span><span>Input Validation</span></div>
+          <ul>
+            <li>Built a fully interactive CLI game featuring dynamic password generation, multi-level progression logic, and robust input validation.</li>
+            <li>Applied structured programming principles — conditionals, loops, and functions — to demonstrate core Python and problem-solving skills.</li>
+          </ul>
+          <a class="project-link" href="https://github.com/yuvibuildsai001" target="_blank" rel="noopener">View on GitHub →</a>
+          <button class="demo-btn" onclick="openDemo('Triple-X — Prison Escape CLI Game','demos/triplex-game.mp4')">▶ View live demo</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS (clickable → modal) -->
+    <section id="certifications">
+      <div class="section-head"><span class="idx mono">05</span><h2>Certifications &amp; achievements</h2><span class="fn">WHERE verified = true;</span></div>
+      <div class="two-col">
+        <div class="list-panel" id="certList"></div>
+        <div class="list-panel">
+          <div class="row"><span class="mark">→</span><span class="txt">12 months at Centum Electronics progressing from UV inspection to independent FCT testing on defence-grade PCBs, maintaining 100% traceability of rejected units.</span></div>
+          <div class="row"><span class="mark">→</span><span class="txt">Completed 11+ industry-recognised certifications spanning electronics standards and data analytics — entirely self-study, alongside full-time employment.</span></div>
+          <div class="row"><span class="mark">→</span><span class="txt">Built 3 end-to-end real-world data projects as a self-taught fresher, reducing manual reporting effort by 60% through automation.</span></div>
+          <div class="row"><span class="mark">→</span><span class="txt">Self-learned Power BI, SQL, and KPI reporting after working hours, every day — a career built on discipline, not a classroom.</span></div>
+          <div class="row"><span class="mark">→</span><span class="txt">Maintains an active GitHub profile with version-controlled, documented data pipelines and project contributions.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JOB PREFERENCES -->
+    <section id="preferences">
+      <div class="section-head"><span class="idx mono">06</span><h2>Job preferences</h2><span class="fn">WHERE status = 'open';</span></div>
+      <div class="two-col">
+        <div class="list-panel">
+          <div class="row"><span class="mark">▸</span><span class="txt"><strong>Titles</strong> — Testing Technician, Quality Control Technician, Electronics Technician, Production Technician, Data Analyst, Python Developer</span></div>
+          <div class="row"><span class="mark">▸</span><span class="txt"><strong>Industries</strong> — EMS, EV, and electronics / medical device manufacturing; data &amp; analytics roles</span></div>
+        </div>
+        <div class="list-panel">
+          <div class="row"><span class="mark">▸</span><span class="txt"><strong>Locations</strong> — Bengaluru, Delhi, Noida, Greater Noida, Chandigarh/Mohali, Rajasthan, Gujarat, Pune</span></div>
+          <div class="row"><span class="mark">▸</span><span class="txt"><strong>Level</strong> — Fresher to 1 year experience; willing to relocate</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <div class="section-head"><span class="idx mono">07</span><h2>Education</h2><span class="fn">ORDER BY year DESC;</span></div>
+      <div>
+        <div class="edu-row">
+          <div class="yr">2026 —<br>Pursuing</div>
+          <div class="body">
+            <h3>B.Tech, Information Technology</h3>
+            <p>Maharshi Dayanand University (MDU), Rohtak, Haryana</p>
+          </div>
+        </div>
+        <div class="edu-row">
+          <div class="yr">2022 – 2025<br>Completed</div>
+          <div class="body">
+            <h3>Diploma, Computer Engineering</h3>
+            <p>Seth Jai Parkash Polytechnic, Damla, Haryana · CGPA 6.8 / 10</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-head"><span class="idx mono">08</span><h2>Contact</h2><span class="fn">INSERT INTO conversations;</span></div>
+      <div class="contact-panel">
+        <span class="idx mono">→ status: open to work</span>
+        <h2>Let's get something built — or debugged.</h2>
+        <p>Whether it's a Testing/QC role on a production floor, a Data Analyst position, or just a question about a dashboard or a solder joint — my inbox is open.</p>
+        <div class="contact-links">
+          <a href="mailto:yuvrajrajput9920@gmail.com">✉ yuvrajrajput9920@gmail.com</a>
+          <a href="tel:+919671144973">☎ +91-967-114-4973</a>
+          <a href="https://github.com/yuvibuildsai001" target="_blank" rel="noopener">⌥ GitHub</a>
+          <a href="image/Resume/Yuvraj_Rajput_Resume.pdf" download>⭳ Resume (PDF)</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>© 2026 Yuvraj Rajput — Bengaluru, Karnataka</footer>
+
+<!-- Certificate modal -->
+<div class="modal-overlay" id="certModal">
+  <div class="modal-box">
+    <div class="modal-titlebar">
+      <h4 id="modalTitle">certificate.jpg</h4>
+      <button class="modal-close" id="modalClose">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<!-- Project demo video modal -->
+<div class="modal-overlay" id="demoModal">
+  <div class="modal-box">
+    <div class="modal-titlebar">
+      <h4 id="demoTitle">demo.mp4</h4>
+      <button class="modal-close" id="demoClose">✕</button>
+    </div>
+    <div class="modal-body" id="demoBody"></div>
+  </div>
+</div>
+
+<script>
+  // Profile picture — put a photo named profile.jpg next to this HTML file to use it automatically.
+  (function(){
+    const slot = document.getElementById('avatarSlot');
+    const testImg = new Image();
+    testImg.onload = function(){
+      const img = document.createElement('img');
+      img.src = 'image/profile1.png';
+      img.alt = 'Yuvraj Rajput';
+      img.className = 'avatar';
+      slot.replaceWith(img);
+    };
+    testImg.onerror = function(){ /* keep initials fallback */ };
+    testImg.src = 'image/profile1.png';
+  })();
+
+  // Nav toggle
+  document.getElementById('navToggle').addEventListener('click', function(){
+    document.getElementById('navMenu').classList.toggle('open');
+  });
+  document.querySelectorAll('nav a').forEach(function(a){
+    a.addEventListener('click', function(){
+      document.getElementById('navMenu').classList.remove('open');
+    });
+  });
+
+  // Certifications data — put matching image files inside a "certs" folder next to this HTML
+  // e.g. certs/deloitte-data-analytics.jpg — filenames below must match exactly.
+  const certs = [
+    {name:"Data Analytics Virtual Internship", issuer:"Deloitte Australia", year:"2026", img:"certs/deloitte-data-analytics.jpg"},
+    {name:"100 Days of Code: Python Bootcamp", issuer:"Udemy", year:"2026", img:"certs/udemy-100-days-python.jpg"},
+    {name:"SQL and Database Management", issuer:"Coursera", year:"2025", img:"certs/coursera-sql.jpg"},
+    {name:"Data Science and Analytics", issuer:"IBM SkillsBuild", year:"2025", img:"certs/ibm-data-science.jpg"},
+    {name:"Machine Learning with Python", issuer:"Krish Naik Academy", year:"2026", img:"certs/krishnaik-ml.jpg"},
+    {name:"IPC-A-610H / IPC-A-620 / IPC-A-600", issuer:"Electronics Assembly & Inspection Standards", year:"25 July-2025", img:"certs/ipc-standards.jpg"},
+    {name:"ESD, MSD, EOHS, 5S, Kaizen", issuer:"Workplace Safety & Quality Practices", year:"30-July-2025", img:"certs/esd-msd-kaizen.jpg"},
+    {name:"RAFAEL-PS20022 & Thales Specification", issuer:"Certified / Trained", year:"14 Nov-2025", img:"certs/rafael-thales.jpg"},
+    {name:"Python Programming Fundamentals", issuer:"Microsoft", year:"15 Jun-2026", img:"image/Certificates/microsoft.png"},
+    {name:"Python Basics", issuer:"HackerRank", year:"12 May-2026", img:"image/Certificates/hackerrank.png"}
+  ];
+
+  const certList = document.getElementById('certList');
+  certs.forEach(function(c, i){
+    const btn = document.createElement('button');
+    btn.className = 'cert-btn';
+    btn.innerHTML = '<span class="mark">✓</span><span class="txt"><strong>' + c.name + '</strong> — ' + c.issuer + '</span>' +
+      (c.year ? '<span class="go mono">' + c.year + '</span>' : '<span class="go">›</span>');
+    btn.addEventListener('click', function(){ openCert(c); });
+    certList.appendChild(btn);
+  });
+
+  const modal = document.getElementById('certModal');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalBody = document.getElementById('modalBody');
+
+  function openCert(c){
+    modalTitle.textContent = c.name;
+    modalBody.innerHTML = '';
+    const img = new Image();
+    img.onload = function(){
+      modalBody.appendChild(img);
+      const meta = document.createElement('div');
+      meta.className = 'modal-meta';
+      meta.textContent = c.issuer + (c.year ? ' · ' + c.year : '');
+      modalBody.appendChild(meta);
+    };
+    img.onerror = function(){
+      modalBody.innerHTML = '<div class="modal-fallback"><div class="icon">🗎</div>' +
+        '<p><strong>' + c.name + '</strong><br>' + c.issuer + (c.year ? ' · ' + c.year : '') + '</p>' +
+        '<p style="margin-top:14px;">No image found yet. Add a photo of this certificate to a <code>certs</code> folder next to this file, named<br><code>' + c.img + '</code></p></div>';
+    };
+    img.src = c.img;
+    img.alt = c.name;
+    modal.classList.add('open');
+  }
+
+  document.getElementById('modalClose').addEventListener('click', function(){ modal.classList.remove('open'); });
+  modal.addEventListener('click', function(e){ if(e.target === modal) modal.classList.remove('open'); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ modal.classList.remove('open'); demoModal.classList.remove('open'); } });
+
+  // Project demo videos — put a video file next to this HTML in a "demos" folder,
+  // named exactly as referenced in each project's openDemo() call.
+  const demoModal = document.getElementById('demoModal');
+  const demoTitle = document.getElementById('demoTitle');
+  const demoBody = document.getElementById('demoBody');
+
+  function openDemo(title, src){
+    demoTitle.textContent = title;
+    demoBody.innerHTML = '';
+    const video = document.createElement('video');
+    video.controls = true;
+    video.playsInline = true;
+    video.src = src;
+    video.onerror = function(){
+      demoBody.innerHTML = '<div class="modal-fallback"><div class="icon">▶</div>' +
+        '<p><strong>' + title + '</strong></p>' +
+        '<p style="margin-top:14px;">No demo video found yet. Add a screen-recording of this project running to a <code>demos</code> folder next to this file, named<br><code>' + src + '</code></p></div>';
+    };
+    demoBody.appendChild(video);
+    demoModal.classList.add('open');
+  }
+
+  document.getElementById('demoClose').addEventListener('click', function(){
+    demoModal.classList.remove('open');
+    demoBody.innerHTML = '';
+  });
+  demoModal.addEventListener('click', function(e){
+    if(e.target === demoModal){ demoModal.classList.remove('open'); demoBody.innerHTML = ''; }
+  });
+</script>
+
+</body>
+</html>
